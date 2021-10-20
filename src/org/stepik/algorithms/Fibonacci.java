@@ -7,7 +7,7 @@ public class Fibonacci {
     Scanner scan = new Scanner(System.in);
     String number = scan.nextLine();
     int fibNum;
-    int[] arr = new int[Integer.valueOf(number) + 1];
+    int[] arr = new int[Integer.parseInt(number) + 1];
     for (int i = 0; i < arr.length; i++) {
       if (i == 0) {
         arr[i] = 0;
