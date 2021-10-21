@@ -14,24 +14,30 @@ import java.util.Scanner;
 
 public class PeriodPisano {
   public static void main(String[] args) {
-    var scan = new Scanner(System.in);
-    var number = scan.nextLine();
-    var strArray = number.trim().split(" ");
-    var fibNum = Long.parseLong(strArray[0]);
-    var modNum = Integer.parseInt(strArray[1]);
+    Scanner scan = new Scanner(System.in);
+    String number = scan.nextLine();
+    String[] strArray = number.trim().split(" ");
+    long fibNum = Long.parseLong(strArray[0]);
+    int modNum = Integer.parseInt(strArray[1]);
     List<Integer> arr = new ArrayList<Integer>();
-    for (int i = 0; i < fibNum; i++) {
+    for (int i = 0; i < 6 * modNum; i++) {
       switch (i) {
-        case 0 -> arr.add(0);
-        case 1, 2 -> arr.add(1 % modNum);
-        default -> arr.add((arr.get(i - 2) + arr.get(i - 1)) % modNum);
+        case (0): arr.add(0);
+          break;
+        case (1):
+        case (2):
+          arr.add(1 % modNum);
+          break;
+        default:
+          arr.add((arr.get(i - 2) + arr.get(i - 1)) % modNum);
       }
-      if (i > 2 && arr.get(i) == 1 && arr.get(i - 1) == 0 || arr.size() > 6 * modNum) {
+      if (i > 2 && arr.get(i) == 1 && arr.get(i - 1) == 0) {
         break;
       }
-      
+    
     }
     System.out.println(arr.get((int) (fibNum % (arr.size() - 2))));
   }
 }
+
 
