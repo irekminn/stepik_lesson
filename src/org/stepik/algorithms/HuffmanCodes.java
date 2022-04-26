@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class HuffmanCodes {
+class HuffmanCodes {
 
   public static void main(String[] args) {
     var scanner = new Scanner(System.in);
