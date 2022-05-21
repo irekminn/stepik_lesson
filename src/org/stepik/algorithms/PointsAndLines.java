@@ -1,7 +1,5 @@
 package org.stepik.algorithms;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Set;
@@ -11,8 +9,8 @@ import java.util.stream.Stream;
 
 class PointsAndLines {
 
-  public static void main(String[] args) throws FileNotFoundException {
-    Scanner scanner = new Scanner(new File("src/org/stepik/algorithms/text.txt"));
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in/*new File("src/org/stepik/algorithms/text.txt")*/);
     String fistLine = scanner.nextLine();
     String[] fistArrayLine = fistLine.split(" ");
     int countLines = Integer.parseInt(fistArrayLine[0]);
