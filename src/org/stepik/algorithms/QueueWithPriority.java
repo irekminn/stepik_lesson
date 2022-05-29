@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Scanner;
 
 
-class queueWithPriority<T extends Comparable<T>> {
+class QueueWithPriority<T extends Comparable<T>> {
 
   private final List<T> array = new ArrayList<>();
 
   public static void main(String[] args) {
 
     Scanner scan = new Scanner(System.in);
-    var queue = new queueWithPriority<Integer>();
+    var queue = new QueueWithPriority<Integer>();
     while (scan.hasNextLine()) {
       var line = scan.nextLine();
 

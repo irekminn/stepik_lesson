@@ -9,22 +9,24 @@ class BinarySearch {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     String lineValue = scanner.nextLine();
-    Integer[] arrayValue = createArray(lineValue);
+    int[] arrayValue = createArray(lineValue);
     String lineKey = scanner.nextLine();
     scanner.close();
-    Integer[] arrayKey = createArray(lineKey);
-    System.out.println(
-        Arrays.stream(arrayKey)
-            .map(key -> Arrays.binarySearch(arrayValue, key))
-            .map(i -> (i < 0) ? "-1" : String.valueOf(i + 1))
-            .collect(Collectors.joining(" "))
-    );
+    int[] arrayKey = createArray(lineKey);
+    System.out.println(getStringFromArray(arrayValue, arrayKey));
   }
 
-  private static Integer[] createArray(String line) {
+  private static String getStringFromArray(int[] arrayValue, int[] arrayKey) {
+    return Arrays.stream(arrayKey)
+        .map(key -> Arrays.binarySearch(arrayValue, key))
+        .mapToObj(i -> (i < 0) ? "-1" : String.valueOf(i + 1))
+        .collect(Collectors.joining(" "));
+  }
+
+  private static int[] createArray(String line) {
     return Arrays.stream(line.split(" "))
         .skip(1)
-        .map(Integer::valueOf)
-        .toArray(Integer[]::new);
+        .mapToInt(Integer::parseInt)
+        .toArray();
   }
 }
