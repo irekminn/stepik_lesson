@@ -14,57 +14,66 @@ class Parentheses {
   public static final String FIGURE_END = "}";
   public static final String ROUND_END = ")";
   public static final String SQUARE_END = "]";
+  public static final String SUCCESS = "Success";
 
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in/*new File("src/org/stepik/structure/text.txt")*/);
     String line = scanner.nextLine();
     scanner.close();
-    Stack<String> stackIn = new Stack<>();
-    Stack<Integer> indexStack = new Stack<>();
-    Pattern pattern = java.util.regex.Pattern.compile(REGEX);
-    String[] array = Stream.of(line)
-        .flatMap(pattern::splitAsStream)
-        .toArray(String[]::new);
-    if (array.length == 1 && array[0].equals("")) {
-      System.out.println("Success");
+
+    if (line.isEmpty()) {
+      System.out.println(SUCCESS);
       return;
     }
-    if (array.length == 1) {
+    if (line.length() == 1) {
       System.out.println(1);
       return;
     }
-    for (int i = 0; i < array.length; i++) {
 
-      switch (array[i]) {
+    Pattern pattern = Pattern.compile(REGEX);
+    String[] arrayLine = greatArrayForLine(line, pattern);
+
+    Stack<String> leftBracket = new Stack<>();
+    Stack<Integer> indexStack = new Stack<>();
+    for (int i = 0; i < arrayLine.length; i++) {
+
+      switch (arrayLine[i]) {
         case FIGURE_START, ROUND_START, SQUARE_START -> {
-          stackIn.push(array[i]);
+          leftBracket.push(arrayLine[i]);
           indexStack.push(i);
         }
+
         case FIGURE_END, ROUND_END, SQUARE_END -> {
-          if (stackIn.size() == 0) {
+          if (leftBracket.size() == 0) {
             System.out.println(i + 1);
             return;
           }
 
-          int rightBracket = stackIn.peek().charAt(0);
-          rightBracket += array[i].equals(ROUND_END) ? 1 : 2;
+          int rightBracket = leftBracket.peek().charAt(0);
+          rightBracket += arrayLine[i].equals(ROUND_END) ? 1 : 2;
 
-          if (array[i].charAt(0) == rightBracket) {
-            stackIn.pop();
+          if (arrayLine[i].charAt(0) == rightBracket) {
+            leftBracket.pop();
             indexStack.pop();
           } else {
             System.out.println(i + 1);
             return;
           }
-
         }
-      }
-    }
 
-    if (stackIn.size() == 0) {
-      System.out.println("Success");
+      } // end switch
+    } // enf for
+
+    if (leftBracket.size() == 0) {
+      System.out.println(SUCCESS);
     } else {
       System.out.println(indexStack.pop() + 1);
     }
+  }
+
+  private static String[] greatArrayForLine(String line, Pattern pattern) {
+    return Stream.of(line)
+        .flatMap(pattern::splitAsStream)
+        .toArray(String[]::new);
   }
 }
