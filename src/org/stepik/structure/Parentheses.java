@@ -66,9 +66,9 @@ class Parentheses {
 
     if (leftBracket.size() == 0) {
       System.out.println(SUCCESS);
-    } else {
-      System.out.println(indexStack.pop() + 1);
+      return;
     }
+    System.out.println(indexStack.pop() + 1);
   }
 
   private static String[] greatArrayForLine(String line, Pattern pattern) {
