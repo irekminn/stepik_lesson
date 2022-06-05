@@ -16,7 +16,7 @@ class NetworkPacketHandling {
 
     Queue<Integer> queue = new LinkedBlockingQueue<>(size);
 
-    for(int i = 0; i < packagesCount; i++) {
+    for (int i = 0; i < packagesCount; i++) {
       int arrival = in.nextInt();
       int duration = in.nextInt();
 
@@ -24,11 +24,11 @@ class NetworkPacketHandling {
         queue.poll();
       }
 
-      if(cpuTime < arrival) {
+      if (cpuTime < arrival) {
         System.out.println(arrival);
         cpuTime = arrival + duration;
         queue.add(cpuTime);
-      } else if(queue.size() < size) {
+      } else if (queue.size() < size) {
         System.out.println(cpuTime);
         cpuTime += duration;
         queue.add(cpuTime);
